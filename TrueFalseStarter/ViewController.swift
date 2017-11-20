@@ -12,14 +12,15 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    let questionsPerRound = 4
+    var trivia = QuestionProvider().questions
+    let questionsPerRound = QuestionProvider().questions.count
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion: Int = 0
     
     var gameSound: SystemSoundID = 0
     
-    let trivia = QuestionProvider().questions
+    
     
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var option1: UIButton!
@@ -68,10 +69,6 @@ class ViewController: UIViewController {
         
     }
     
-    // Remember to add the logic for showing each question once.
-    // Just remove the elements from the array when we show them.
-    //
-    //
     
     @IBAction func checkAnswer(_ sender: UIButton) {
         // Increment the questions asked counter
@@ -83,18 +80,26 @@ class ViewController: UIViewController {
         if sender.title(for: .normal) == correctAnswer {
             correctQuestions += 1
             questionField.text = "Correct!"
+            // Remove the question from the array so each question shows up once
+            trivia.remove(at: indexOfSelectedQuestion)
         } else {
             questionField.text = "Sorry, wrong answer!"
-            sender.tintColor = UIColor.green
+            trivia.remove(at: indexOfSelectedQuestion)
+            
+            // Change the background of correct answer for extra credit
+            //sender.tintColor = UIColor.green
+            
         }
         
-        loadNextRoundWithDelay(seconds: 3)
+        loadNextRoundWithDelay(seconds: 2)
     }
     
     func nextRound() {
         if questionsAsked == questionsPerRound {
             // Game is over
             displayScore()
+            // populate the question array for new game
+            trivia = QuestionProvider().questions
         } else {
             // Continue game
             displayQuestion()
