@@ -19,10 +19,16 @@ class ViewController: UIViewController {
     var indexOfSelectedQuestion: Int = 0
     let delayTime = 2   // seconds
     
+    // Audio variables
     var gameSound: SystemSoundID = 0
-    
     var correctSound: SystemSoundID = 1
     var wrongSound: SystemSoundID = 2
+    
+    // Lightning round variables
+    var playTime = 15  // Seconds
+    let staticPlayTime = 15 // Seconds
+    var timer = Timer()
+    var isTimerRunning = false
     
     
     
@@ -32,14 +38,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var option3: UIButton!
     @IBOutlet weak var option4: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         loadGameStartSound()
         loadAnswerSounds()
         // Start game
         playGameStartSound()
+        runTimer()
         displayQuestion()
     }
 
@@ -51,7 +58,6 @@ class ViewController: UIViewController {
     func displayQuestion() {
         indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
         let questionPack = trivia[indexOfSelectedQuestion]
-        print(trivia.count)
         questionField.text = questionPack.question
         option1.setTitle(questionPack.option1, for: .normal)
         option2.setTitle(questionPack.option2, for: .normal)
@@ -81,7 +87,7 @@ class ViewController: UIViewController {
         
         let selectedQuestionPack = trivia[indexOfSelectedQuestion]
         let correctAnswer = selectedQuestionPack.correctAnswer
-        print(sender.title(for: .normal)!, correctAnswer)
+        
         if sender.title(for: .normal) == correctAnswer {
             correctQuestions += 1
             questionField.text = "Correct!"
@@ -93,18 +99,16 @@ class ViewController: UIViewController {
             playWrongAnswerSound()
             trivia.remove(at: indexOfSelectedQuestion)
             
-            // Change the background of correct answer for extra credit
-            //sender.tintColor = UIColor.green
-            
+            // Pulsate the correct answer --- Extra credit
             switch correctAnswer {
             case option1.currentTitle!:
-                option1.backgroundColor = UIColor.red
+                option1.pulsate()
             case option2.currentTitle!:
-                option2.backgroundColor = UIColor.red
+                option2.pulsate()
             case option3.currentTitle!:
-                option3.backgroundColor = UIColor.red
+                option3.pulsate()
             case option4.currentTitle!:
-                option4.backgroundColor = UIColor.red
+                option4.pulsate()
             default: print("")
             }
             
@@ -134,10 +138,21 @@ class ViewController: UIViewController {
         
         questionsAsked = 0
         correctQuestions = 0
+        resetTimer()
         nextRound()
+        
     }
     
-
+    // I want to set IBaction on timer countdown
+    /*
+    var helloWorldTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(ViewController.sayHello), userInfo: nil, repeats: true)
+    
+    func sayHello()
+    {
+        print("hello World")
+    }
+    */
+ 
     // MARK: Helper Methods
     
     func loadNextRoundWithDelay(seconds: Int) {
@@ -180,6 +195,45 @@ class ViewController: UIViewController {
     
     func playWrongAnswerSound() {
         AudioServicesPlaySystemSound(wrongSound)
+    }
+    
+    
+    // Helper functions for lighting round
+    func runTimer() {
+        isTimerRunning = true
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    func updateTimer() {
+        if playTime > 0 {
+            playTime -= 1
+            timerLabel.text = "\(playTime)"
+        } else if playTime == 0 {
+            isTimerRunning = false
+        }
+    }
+    
+    func resetTimer() {
+        playTime = staticPlayTime
+    }
+    
+}
+
+// extending UIButton to pulsate the correct answer
+extension UIButton {
+    
+    func pulsate() {
+        
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.6
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 2
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+        
+        layer.add(pulse, forKey: "pulse")
     }
     
 }
