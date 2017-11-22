@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDJ-Hk-Bke">
-                                <rect key="frame" x="36" y="182" width="303" height="30"/>
+                                <rect key="frame" x="36" y="181" width="303" height="30"/>
                                 <color key="backgroundColor" red="0.0010629586176946759" green="0.61509525775909424" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Option 1"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxb-gl-AG4">
-                                <rect key="frame" x="36" y="242" width="303" height="30"/>
+                                <rect key="frame" x="36" y="241" width="303" height="30"/>
                                 <color key="backgroundColor" red="0.0010629586176946759" green="0.61509525775909424" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Option 2"/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ef-YJ-vty">
-                                <rect key="frame" x="36" y="299" width="303" height="30"/>
+                                <rect key="frame" x="36" y="301" width="303" height="30"/>
                                 <color key="backgroundColor" red="0.0010629586176946759" green="0.61509525775909424" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Option 3"/>
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRB-uL-y7S">
-                                <rect key="frame" x="36" y="354" width="303" height="30"/>
+                                <rect key="frame" x="36" y="361" width="303" height="30"/>
                                 <color key="backgroundColor" red="0.0010629586176946759" green="0.61509525775909424" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Option 4"/>
@@ -79,9 +79,8 @@
                                     <action selector="playAgain" destination="BYZ-38-t0r" eventType="touchUpInside" id="klz-B2-JAN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Let's go" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdv-sf-Ox7">
-                                <rect key="frame" x="36" y="449" width="303" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's go" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdv-sf-Ox7">
+                                <rect key="frame" x="36" y="451" width="303" height="36"/>
                                 <color key="backgroundColor" red="0.80783218145370483" green="1" blue="0.010840874165296555" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.99140816926956177" green="0.15885353088378906" blue="0.0010561210801824927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -94,12 +93,14 @@
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="leading" secondItem="nDJ-Hk-Bke" secondAttribute="leading" id="2mM-XV-fcs"/>
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="leading" secondItem="9Ef-YJ-vty" secondAttribute="leading" id="3Ey-qP-f3P"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K17-uy-MvB" secondAttribute="bottom" constant="100" id="7Ux-2y-Yyd"/>
-                            <constraint firstItem="bxb-gl-AG4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="242" id="BI1-uW-a7Z"/>
+                            <constraint firstItem="qdv-sf-Ox7" firstAttribute="top" secondItem="rRB-uL-y7S" secondAttribute="bottom" constant="60" id="A31-jj-VmI"/>
+                            <constraint firstItem="qdv-sf-Ox7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Lev-jz-40D"/>
+                            <constraint firstItem="K17-uy-MvB" firstAttribute="top" secondItem="qdv-sf-Ox7" secondAttribute="bottom" constant="40" id="N28-RO-Gjl"/>
                             <constraint firstItem="I3V-ih-1Ky" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="NHa-20-WMX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="I3V-ih-1Ky" secondAttribute="trailing" constant="20" id="PO4-mo-Xw2"/>
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="trailing" secondItem="rRB-uL-y7S" secondAttribute="trailing" id="SSE-zJ-3ow"/>
-                            <constraint firstItem="rRB-uL-y7S" firstAttribute="top" secondItem="9Ef-YJ-vty" secondAttribute="bottom" constant="25" id="UXG-Vn-uD5"/>
-                            <constraint firstItem="9Ef-YJ-vty" firstAttribute="top" secondItem="bxb-gl-AG4" secondAttribute="bottom" constant="27" id="VsP-PR-YSb"/>
+                            <constraint firstItem="rRB-uL-y7S" firstAttribute="top" secondItem="9Ef-YJ-vty" secondAttribute="bottom" constant="30" id="UXG-Vn-uD5"/>
+                            <constraint firstItem="9Ef-YJ-vty" firstAttribute="top" secondItem="bxb-gl-AG4" secondAttribute="bottom" constant="30" id="VsP-PR-YSb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nDJ-Hk-Bke" secondAttribute="trailing" constant="20" id="YLH-7f-UPb"/>
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="leading" secondItem="rRB-uL-y7S" secondAttribute="leading" id="YR3-Qz-q7v"/>
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="trailing" secondItem="9Ef-YJ-vty" secondAttribute="trailing" id="juw-DW-P8B"/>
@@ -108,6 +109,7 @@
                             <constraint firstItem="I3V-ih-1Ky" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="qg0-me-KQ8"/>
                             <constraint firstItem="K17-uy-MvB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="rCt-6T-cPX"/>
                             <constraint firstItem="bxb-gl-AG4" firstAttribute="top" secondItem="nDJ-Hk-Bke" secondAttribute="bottom" constant="30" id="t5c-eM-FDB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qdv-sf-Ox7" secondAttribute="trailing" constant="20" id="ted-K1-VfH"/>
                             <constraint firstItem="K17-uy-MvB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="213.5" id="yFg-Ct-WfT"/>
                         </constraints>
                     </view>

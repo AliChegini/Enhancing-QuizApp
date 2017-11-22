@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     var wrongSound: SystemSoundID = 2
     
     // Lightning round variables
-    var playTime = 15  // Seconds
-    let staticPlayTime = 15 // Seconds
+    var playTime = 40  // Seconds
+    let staticPlayTime = 40 // Seconds
     var timer = Timer()
     
     
@@ -54,15 +54,23 @@ class ViewController: UIViewController {
     }
     
     func displayQuestion() {
-        // Rememebr to take care of int overflow for 0-1
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count-1)
-        print("index of selected question is \(indexOfSelectedQuestion) and count is \(trivia.count)")
+        // trivia.count-1 to avoid index out of bound
+        if trivia.count-1 >= 0 {
+            // branch to avoid Int Overflow
+            indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count-1)
+        }
         let questionPack = trivia[indexOfSelectedQuestion]
         questionField.text = questionPack.question
         option1.setTitle(questionPack.option1, for: .normal)
         option2.setTitle(questionPack.option2, for: .normal)
         option3.setTitle(questionPack.option3, for: .normal)
-        option4.setTitle(questionPack.option4, for: .normal)
+        // Mix of three/4 option feature
+        if questionPack.option4 != nil {
+            option4.setTitle(questionPack.option4, for: .normal)
+        } else {
+            option4.isHidden = true
+        }
+        
         playAgainButton.isHidden = true
     }
     
@@ -77,7 +85,7 @@ class ViewController: UIViewController {
         // Display play again button
         playAgainButton.isHidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerGame) correct!"
+        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsAsked) correct!"
         
     }
     

@@ -11,8 +11,17 @@ struct QuestionStructure {
     let option1: String
     let option2: String
     let option3: String
-    let option4: String
+    let option4: String?
     let correctAnswer: String
+    
+    init(question: String, option1: String, option2: String, option3: String, option4: String? = nil, correctAnswer: String) {
+        self.question = question
+        self.option1 = option1
+        self.option2 = option2
+        self.option3 = option3
+        self.option4 = option4
+        self.correctAnswer = correctAnswer
+    }
     
 }
 
@@ -27,7 +36,8 @@ struct QuestionProvider {
         QuestionStructure(question: "Which of the following rivers is longest?", option1: "Yangtze", option2: "Mississippi", option3: "Congo", option4: "Mekong", correctAnswer: "Mississippi"),
         QuestionStructure(question: "Which city is the oldest?", option1: "Mexico City", option2: "Cape Town", option3: "San Juan", option4: "Sydney", correctAnswer: "Mexico City"),
         QuestionStructure(question: "Which country was the first to allow women to vote in national elections?", option1: "Poland", option2: "United States", option3: "Sweden", option4: "Senegal", correctAnswer: "Poland"),
-        QuestionStructure(question: "Which of these countries won the most medals in the 2012 Summer Games?", option1: "France", option2: "Germany", option3: "Japan", option4: "Great Britain", correctAnswer: "Great Britain")
+        QuestionStructure(question: "Which of these countries won the most medals in the 2012 Summer Games?", option1: "France", option2: "Germany", option3: "Japan", option4: "Great Britain", correctAnswer: "Great Britain"),
+        QuestionStructure(question: "Which of these countries won the last world cup?", option1: "France", option2: "Germany", option3: "Japan", correctAnswer: "Germany")
     ]
     
     func selectQuestion(randomNumber: Int) -> QuestionStructure{
