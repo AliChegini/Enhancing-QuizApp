@@ -13,11 +13,11 @@ import AudioToolbox
 class ViewController: UIViewController {
     
     var trivia = QuestionProvider().questions
-    let questionsPerRound = QuestionProvider().questions.count
+    let questionsPerGame = QuestionProvider().questions.count
     var questionsAsked = 0
     var correctQuestions = 0
-    var indexOfSelectedQuestion: Int = 0
-    let delayTime = 2   // seconds
+    var indexOfSelectedQuestion:  Int = 0
+    let delayBetweenQuestions = 1   // seconds
     
     // Audio variables
     var gameSound: SystemSoundID = 0
@@ -28,8 +28,6 @@ class ViewController: UIViewController {
     var playTime = 15  // Seconds
     let staticPlayTime = 15 // Seconds
     var timer = Timer()
-    var isTimerRunning = false
-    
     
     
     @IBOutlet weak var questionField: UILabel!
@@ -56,7 +54,9 @@ class ViewController: UIViewController {
     }
     
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
+        // Rememebr to take care of int overflow for 0-1
+        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count-1)
+        print("index of selected question is \(indexOfSelectedQuestion) and count is \(trivia.count)")
         let questionPack = trivia[indexOfSelectedQuestion]
         questionField.text = questionPack.question
         option1.setTitle(questionPack.option1, for: .normal)
@@ -72,11 +72,12 @@ class ViewController: UIViewController {
         option2.isHidden = true
         option3.isHidden = true
         option4.isHidden = true
+        timerLabel.isHidden = true
         
         // Display play again button
         playAgainButton.isHidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerGame) correct!"
         
     }
     
@@ -114,15 +115,13 @@ class ViewController: UIViewController {
             
         }
         
-        loadNextRoundWithDelay(seconds: delayTime)
+        loadNextRoundWithDelay(seconds: delayBetweenQuestions)
     }
     
     func nextRound() {
-        if questionsAsked == questionsPerRound {
+        if questionsAsked == questionsPerGame {
             // Game is over
             displayScore()
-            // populate the question array for new game
-            trivia = QuestionProvider().questions
         } else {
             // Continue game
             displayQuestion()
@@ -130,30 +129,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func playAgain() {
-        // Show the answer buttons
+        // Show the options buttons
         option1.isHidden = false
         option2.isHidden = false
         option3.isHidden = false
         option4.isHidden = false
+        timerLabel.isHidden = false
         
         questionsAsked = 0
         correctQuestions = 0
         resetTimer()
+        populateQuestionsArray()
         nextRound()
         
     }
     
-    // I want to set IBaction on timer countdown
-    /*
-    var helloWorldTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(ViewController.sayHello), userInfo: nil, repeats: true)
     
-    func sayHello()
-    {
-        print("hello World")
-    }
-    */
- 
-    // MARK: Helper Methods
+    // MARK: Helper Methods //
     
     func loadNextRoundWithDelay(seconds: Int) {
         // Converts a delay in seconds to nanoseconds as signed 64 bit integer
@@ -178,7 +170,7 @@ class ViewController: UIViewController {
     }
     
     
-    // Helper functions to load and play sounds
+    // load and play sounds for correct and wrong answer
     func loadAnswerSounds() {
         let pathToCorrectSoundFile = Bundle.main.path(forResource: "Correct", ofType: "wav")
         let correctSoundURL = URL(fileURLWithPath: pathToCorrectSoundFile!)
@@ -198,26 +190,34 @@ class ViewController: UIViewController {
     }
     
     
+    // populate the question array for new game
+    func populateQuestionsArray() {
+        trivia = QuestionProvider().questions
+    }
+    
     // Helper functions for lighting round
+    // The main countdown timer for the game
     func runTimer() {
-        isTimerRunning = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
     }
     
+    // Showing the countdown on screen
     func updateTimer() {
         if playTime > 0 {
             playTime -= 1
             timerLabel.text = "\(playTime)"
         } else if playTime == 0 {
-            isTimerRunning = false
+            // if countdown is 0 game is over and display score
+            displayScore()
         }
     }
     
     func resetTimer() {
         playTime = staticPlayTime
     }
-    
+
 }
+
 
 // extending UIButton to pulsate the correct answer
 extension UIButton {
@@ -229,12 +229,11 @@ extension UIButton {
         pulse.fromValue = 0.95
         pulse.toValue = 1.0
         pulse.autoreverses = true
-        pulse.repeatCount = 2
+        pulse.repeatCount = 1
         pulse.initialVelocity = 0.5
         pulse.damping = 1.0
         
         layer.add(pulse, forKey: "pulse")
     }
-    
 }
 
