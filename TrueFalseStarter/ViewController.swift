@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  TrueFalseStarter
-//
-//  Created by Pasan Premaratne on 3/9/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
-//
 
 import UIKit
 import GameKit
@@ -66,6 +59,7 @@ class ViewController: UIViewController {
         option3.setTitle(questionPack.option3, for: .normal)
         // Mix of three/4 option feature
         if questionPack.option4 != nil {
+            option4.isHidden = false
             option4.setTitle(questionPack.option4, for: .normal)
         } else {
             option4.isHidden = true
@@ -86,7 +80,6 @@ class ViewController: UIViewController {
         playAgainButton.isHidden = false
         
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsAsked) correct!"
-        
     }
     
     
@@ -149,7 +142,6 @@ class ViewController: UIViewController {
         resetTimer()
         populateQuestionsArray()
         nextRound()
-        
     }
     
     

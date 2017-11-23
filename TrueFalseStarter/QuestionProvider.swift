@@ -37,7 +37,9 @@ struct QuestionProvider {
         QuestionStructure(question: "Which city is the oldest?", option1: "Mexico City", option2: "Cape Town", option3: "San Juan", option4: "Sydney", correctAnswer: "Mexico City"),
         QuestionStructure(question: "Which country was the first to allow women to vote in national elections?", option1: "Poland", option2: "United States", option3: "Sweden", option4: "Senegal", correctAnswer: "Poland"),
         QuestionStructure(question: "Which of these countries won the most medals in the 2012 Summer Games?", option1: "France", option2: "Germany", option3: "Japan", option4: "Great Britain", correctAnswer: "Great Britain"),
-        QuestionStructure(question: "Which of these countries won the last world cup?", option1: "France", option2: "Germany", option3: "Japan", correctAnswer: "Germany")
+        QuestionStructure(question: "Which of these countries won the last world cup?", option1: "France", option2: "Germany", option3: "Japan", correctAnswer: "Germany"),
+        QuestionStructure(question: "Which conspiracy theory do you believe in?", option1: "Toopac is still alive", option2: "U.S faked the moon landing", option3: "Big brother is watching us", correctAnswer: "U.S faked the moon landing"),
+        QuestionStructure(question: "What is the result of 12 + 56?", option1: "68", option2: "86", option3: "Not a number", correctAnswer: "68")
     ]
     
     func selectQuestion(randomNumber: Int) -> QuestionStructure{
