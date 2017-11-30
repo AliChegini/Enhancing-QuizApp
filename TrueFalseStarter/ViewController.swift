@@ -5,8 +5,8 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    var trivia = QuestionProvider().questions
-    let questionsPerGame = QuestionProvider().questions.count
+    var trivia = QuestionManager().questions
+    let questionsPerGame = QuestionManager().questions.count
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion:  Int = 0
@@ -192,7 +192,7 @@ class ViewController: UIViewController {
     
     // populate the question array for new game
     func populateQuestionsArray() {
-        trivia = QuestionProvider().questions
+        trivia = QuestionManager().questions
     }
     
     // Helper functions for lighting round
